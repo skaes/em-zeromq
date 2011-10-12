@@ -25,21 +25,26 @@ Want to help out? Ask!
 
 ## Requiring the code
 Either
+
 ```ruby
     require 'em-zeromq-c'
 ```
 or
+
 ```ruby
     require 'zmq'
     require 'em-zeromq'
 ```
+
 will work.
 
 If you prefer the ffi version:
+
 ```ruby
     require 'em-zeromq-ffi'
 ```
 or
+
 ```ruby
     require 'ffi-rzmq'
     require 'em-zeromq'
