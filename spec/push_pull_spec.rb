@@ -43,7 +43,7 @@ describe EventMachine::ZeroMQ do
     
     it "should receive the message intact" do
       @results[:pull_hndlr].received.should_not be_empty
-      @results[:pull_hndlr].received.first.should be_a(ZMQ::Message)
+      @results[:pull_hndlr].received.first.should be_a(ZMQ::Message) if defined?(ZMQ::Message)
       @results[:pull_hndlr].received.first.copy_out_string.should == @test_message
     end
   end

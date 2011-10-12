@@ -3,11 +3,11 @@ $:.push File.expand_path("../lib", __FILE__)
 require "em-zeromq/version"
 
 Gem::Specification.new do |s|
-  s.name        = "em-zeromq"
+  s.name        = "em-zeromq-c"
   s.version     = EmZeromq::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Andrew Cholakian"]
-  s.email       = ["andrew@andrewvc.com"]
+  s.authors     = ["Andrew Cholakian", "Stefan Kaes"]
+  s.email       = ["andrew@andrewvc.com", "skaes@railsexpress.de"]
   s.homepage    = "https://github.com/andrewvc/em-zeromq"
   s.summary     = %q{Low level event machine support for ZeroMQ}
   s.description = %q{Low level event machine support for ZeroMQ}
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "em-zeromq"
 
   s.add_dependency 'eventmachine', '>= 1.0.0.beta.4'
-  s.add_dependency 'ffi-rzmq', '>= 0.8.2'
+  s.add_dependency 'zmq', '>= 2.1.4'
 
   s.add_development_dependency 'rspec', '>= 2.5.0'
 

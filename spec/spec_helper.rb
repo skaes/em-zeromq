@@ -2,6 +2,14 @@ require 'rspec'
 require 'set'
 Thread.abort_on_exception = true
 
+if ARGV.detect{|a| a =~ /setup_c.rb$/}
+  # puts "loading zmq"
+  require "zmq"
+elsif ARGV.detect{|a| a =~ /setup_ffi.rb$/}
+  # puts "loading ffi-rzmq"
+  require "ffi-rzmq"
+end
+
 require File.expand_path(
     File.join(File.dirname(__FILE__), %w[.. lib em-zeromq]))
 

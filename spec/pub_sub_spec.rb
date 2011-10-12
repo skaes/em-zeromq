@@ -46,9 +46,11 @@ describe EventMachine::ZeroMQ do
     it "should receive one message" do
       @results[:sub_hndlr].received.length.should == 1
     end
-    
-    it "should receive the message as a ZMQ::Message" do
-      @results[:sub_hndlr].received.first.should be_a(ZMQ::Message)
+
+    if defined?(ZMQ::Message)
+      it "should receive the message as a ZMQ::Message" do
+        @results[:sub_hndlr].received.first.should be_a(ZMQ::Message)
+      end
     end
     
     it "should receive the message intact" do

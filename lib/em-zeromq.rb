@@ -1,5 +1,55 @@
 require 'eventmachine'
-require 'ffi-rzmq'
+
+# determine which zeromq library to load
+unless defined?(ZMQ)
+  begin
+    require 'ffi-rzmq'
+  rescue LoadError
+    require 'zmq'
+  end
+end
+
+unless defined?(ZMQ::Message)
+
+  module ZMQ
+    POLLIN = 1
+    POLLOUT = 2
+    POLLERR = 4
+
+    SocketTypeNameMap = {
+      PAIR=>"PAIR",
+      PUB=>"PUB",
+      SUB=>"SUB",
+      REQ=>"REQ",
+      REP=>"REP",
+      DEALER=>"DEALER",
+      ROUTER=>"ROUTER",
+      PULL=>"PULL",
+      PUSH=>"PUSH",
+      #XPUB=>"XPUB",
+      #XSUB=>"XSUB"
+    }
+
+    class Socket
+      def name
+        @name ||= SocketTypeNameMap[getsockopt(TYPE)]
+      end
+      alias send_string send
+
+      def more_parts?
+        getsockopt(RCVMORE)
+      end
+    end
+
+  end
+
+  class String
+    def copy_out_string
+      self
+    end
+  end
+end
+
 
 module EmZeromq
 

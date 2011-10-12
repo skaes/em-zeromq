@@ -156,12 +156,18 @@ module EventMachine
     
       # internal methods
 
-      def get_message
-        msg       = ZMQ::Message.new
-        msg_recvd = @socket.recv(msg, ZMQ::NOBLOCK)
-        msg_recvd ? msg : nil
+      if defined?(ZMQ::Message)
+        def get_message
+          msg       = ZMQ::Message.new
+          msg_recvd = @socket.recv(msg, ZMQ::NOBLOCK)
+          msg_recvd ? msg : nil
+        end
+      else
+        def get_message
+          @socket.recv(ZMQ::NOBLOCK)
+        end
       end
-      
+
       # Detaches the socket from the EM loop,
       # then closes the socket
       def detach_and_close

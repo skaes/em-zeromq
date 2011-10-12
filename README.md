@@ -6,23 +6,41 @@ EventMachine support for ZeroMQ
 
 ## Usage: ##
 
-Tested and functional with Rubinius, jRuby, and 1.9.2.
+Tested and functional with Rubinius, jRuby, and MRI 1.9.2.
 
-If using 1.9.2 you must `gem install ffi` before using.
+MRI 1.8.7 is not supported because of it's poor thread support.
 
-MRI 1.8.7 does not work with libzmq.
+The code ships as two alternative gems:
 
-This only works with ZeroMQ 2.1.x which is still unreleased
-Build+Install ZeroMQ 2.1 from HEAD ( https://github.com/zeromq/zeromq2 ) 
+ * em-zeromq-ffi (based on the ffi-zeromq gem, available for all platforms)
+ * em-zeromq-c (based on the zmq gem, which is only available for MRI rubies)
+
+The main reason for shipping two different gems is that rubygems version requirements
+don't support the specification dependent on the ruby being used to install the gem.
+
+If you are using MRI 1.9.2 and insist on using the ffi version, you must ensure that the
+ffi gem is installed for ffi-zeromq to work.
 
 Want to help out? Ask!
 
-## Example ##
-    require 'rubygems'
+## Requiring the code
+Either
+    require 'em-zeromq-c'
+or
+    require 'zmq'
     require 'em-zeromq'
-        
-    Thread.abort_on_exception = true
+will work.
 
+If you prefer the ffi version:
+    require 'em-zeromq-ffi'
+or
+    require 'ffi-rzmq'
+    require 'em-zeromq'
+will do the trick.
+
+## Example ##
+    Thread.abort_on_exception = true
+    
     class EMTestPullHandler
       attr_reader :received
       def on_readable(socket, messages)
@@ -31,7 +49,7 @@ Want to help out? Ask!
         end
       end
     end
-
+    
     EM.run do
       ctx = EM::ZeroMQ::Context.new(1)
       
