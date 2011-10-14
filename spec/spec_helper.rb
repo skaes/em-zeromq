@@ -2,11 +2,11 @@ require 'rspec'
 require 'set'
 Thread.abort_on_exception = true
 
-if ARGV.detect{|a| a =~ /setup_c.rb$/}
-  # puts "loading zmq"
+if ARGV.detect{|a| a =~ /setup_mri.rb$/}
+  puts "loading zmq"
   require "zmq"
 elsif ARGV.detect{|a| a =~ /setup_ffi.rb$/}
-  # puts "loading ffi-rzmq"
+  puts "loading ffi-rzmq"
   require "ffi-rzmq"
 end
 

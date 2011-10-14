@@ -12,8 +12,8 @@ MRI 1.8.7 is not supported because of it's poor thread support.
 
 The code ships as two alternative gems:
 
- * em-zeromq-ffi (based on the ffi-rzmq gem, available for all platforms)
- * em-zeromq-c (based on the zmq gem, which is only available for MRI rubies)
+ * em-zeromq     (based on the ffi-rzmq gem, available for all platforms)
+ * em-zeromq-mri (based on the zmq gem, which is only available for MRI rubies)
 
 The main reason for shipping two different gems is that rubygems version requirements
 don't support the specification dependent on the ruby being used to install the gem.
@@ -27,7 +27,7 @@ Want to help out? Ask!
 Either
 
 ```ruby
-    require 'em-zeromq-c'
+    require 'em-zeromq-mri'
 ```
 or
 
