@@ -15,11 +15,8 @@ The code ships as two alternative gems:
  * em-zeromq     (based on the ffi-rzmq gem, available for all platforms)
  * em-zeromq-mri (based on the zmq gem, which is only available for MRI rubies)
 
-One reason for shipping two different gems is that rubygems version requirements don't
+The reason for shipping two different gems is that rubygems version requirements don't
 support specifying dependencies based on the ruby being used to install the gem.
-
-Another reason for shipping a MRI specific gem is that the ffi based version leaks
-memory like a sieve. If you use a MRI ruby, using em-zeromq-mri is strongly recommended.
 
 If you are using MRI 1.9.2 and insist on using the ffi version, you must ensure that the
 ffi gem is installed for ffi-zeromq to work.
